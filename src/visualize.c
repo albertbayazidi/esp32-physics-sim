@@ -11,3 +11,5 @@ void printVecInt(vec2D_int32_t vec) {
 void printFloat(float val) { printf("float = %.2f \n", val); }
 
 void printInt(int32_t val) { printf("int = %d \n", val); }
+
+void printFixedAsFloat(int32_t val) { printFloat(FIXED_TO_FLOAT(val)); }
