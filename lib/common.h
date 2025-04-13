@@ -13,6 +13,9 @@
 #define FIXED_MUL(x, y) ((((x) >> 8) * ((y) >> 8)) >> 0)
 #define FIXED_DIV(x, y) (((x) << 8) / (y) << 8)
 
+#define DYNAMIC_MUL(x, y, nr) ((((x) >> nr) * ((y) >> nr - 16)) >> 0)
+#define DYNAMIC_DIV(x, y, nr) (((x) << nr) / (y) << nr - 16)
+
 #define MUL(x, y) (FIXED_TO_FLOAT(x) * FIXED_TO_FLOAT(y))
 #define DIV(x, y) (FIXED_TO_FLOAT(x) / FIXED_TO_FLOAT(y))
 

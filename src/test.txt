@@ -1,0 +1,24 @@
+printf("looking at the whole vectors\n");
+printVecFloat(a);
+
+printVecInt(b);
+printVecInt(c);
+
+printf(
+    "checking vector legth of float and a fixed point vector (number is turned back into flaot for compuation) \n");
+printFloat(vecLenFloat(a));
+printFloat(vecLenFixed(b));
+
+printf("printing fixed point value as float \n");
+printFixedAsFloat(b.x);
+
+printf("fixed point multiplication vs float multiplicaion \n");
+printFixedAsFloat(FIXED_MUL(b.x, b.y));
+printFloat(FIXED_TO_FLOAT(b.x) * FIXED_TO_FLOAT(b.y));
+
+printf("fixed point divison (cheap) vs float divison (expensive) \n");
+printFixedAsFloat(FIXED_DIV(b.x, b.y));
+printFloat(FIXED_TO_FLOAT(b.x) / FIXED_TO_FLOAT(b.y));
+
+
+

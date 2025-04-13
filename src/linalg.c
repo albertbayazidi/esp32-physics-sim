@@ -14,7 +14,6 @@ float vecLenFloat(vec2D_float vec) {
 }
 
 float vecLenFixed(vec2D_int32_t vec) {
-    float temp_x = FIXED_TO_FLOAT(vec.x);
-    float temp_y = FIXED_TO_FLOAT(vec.y);
-    return sqrt(temp_x * temp_x + temp_y * temp_y);
+    return sqrt(FIXED_TO_FLOAT(vec.x) * FIXED_TO_FLOAT(vec.x) +
+                FIXED_TO_FLOAT(vec.y) * FIXED_TO_FLOAT(vec.y));
 }
