@@ -16,10 +16,43 @@ use bear -- make
 
 ## ESP32 Tasks  
 - [ ] Evaluate the feasibility of using a Taylor or Padé approximation for square root
-- [ ] Test if FIXED_MUL/DIV is fater then just MUL/DIV
+- [x] Test if FIXED_MUL/DIV is fater then just MUL/DIV
+    - normal multiplication was [faster](#Timing-results-pc-fixed-vs-float-system) on pc, still needs to be checked on ESP32
+
+
+### Timing results pc fixed vs float system (only multiplication)
+```c
+void FIXED_MULWrapper(void* args) {
+    void** ptrs = (void**)args;
+    int32_t x = *(int32_t*)ptrs[0];
+    int32_t y = *(int32_t*)ptrs[1];
+    for (int i = 0; i < 100; i++) {
+        (FIXED_MUL(x, y));
+    }
+}
+
+void MULWrapper(void* args) {
+    void** ptrs = (void**)args;
+    int32_t x = *(int32_t*)ptrs[0];
+    int32_t y = *(int32_t*)ptrs[1];
+    for (int i = 0; i < 100; i++) {
+        (MUL(x, y));
+    }
+
+int main(){
+    ...
+    // use them like this inside of main
+
+    void* temp[2] = {&b.x, &b.y};
+
+    timeFunc(MULWrapper, temp);
+    timeFunc(FIXED_MULWrapper, temp);
+
+    return 0;
+}
+```
 
 ### Wrapper examples
-
 ```c
 void printVecFloatWrapper(void* arg) {
     vec2D_float* vec = (vec2D_float*)arg;
@@ -43,4 +76,3 @@ int main(){
     return 0
 }
 
-```
